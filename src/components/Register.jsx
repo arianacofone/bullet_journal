@@ -1,13 +1,13 @@
-// This file handles login component tied to firebase authorization.
 
 import React, { Component } from 'react';
-import { withRouter, Link } from 'react-router';
+import { withRouter } from 'react-router';
 import firebase from '../../firebase.config.js';
 
-class Login extends Component {
+class Register extends Component {
   constructor() {
     super();
     this.state = {
+      name: '',
       email: '',
       password: '',
     };
@@ -21,12 +21,16 @@ class Login extends Component {
     this.setState(objectState);
   }
   handleSubmit() {
-    const { email, password } = this.state;
+    const { name, email, password } = this.state;
     firebase.auth()
-      .signInWithEmailAndPassword(email, password)
+      .signInWithEmailAndPassword(name, email, password)
       .catch((err) => {
-        const errorCode = err.code;
-        const errorMessage = err.message;
+        console.log(err);
+      })
+      .then((newUser) => {
+        firebase.database().ref('users')
+          .child(newUser.uid)
+          .set({ name: '', email: email })
       })
       .then(() => {
         this.props.router.push('./app')
@@ -34,9 +38,17 @@ class Login extends Component {
   }
   render() {
     return (
-      <div id="login">
-        <h4>LOGIN</h4>
-        <div id="login-form">
+      <div id="register">
+        <h4>REGISTER</h4>
+        <div id="register-form">
+          <div>
+            <input
+              name="name"
+              onChange={this.handleChange}
+              type="text"
+              placeholder="name"
+            />
+          </div>
           <div>
             <input
               name="email"
@@ -54,13 +66,12 @@ class Login extends Component {
             />
           </div>
           <button className="btn" onClick={this.handleSubmit}>
-            Login
+            Register
           </button>
-          <Link to="/register" id="register">Register</Link>
         </div>
       </div>
     );
   }
 }
 
-export default withRouter(Login);
+export default withRouter(Register);
