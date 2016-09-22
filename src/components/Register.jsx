@@ -1,39 +1,37 @@
-
 import React, { Component } from 'react';
-import { withRouter } from 'react-router';
 import firebase from '../../firebase.config.js';
+import { withRouter } from 'react-router';
 
 class Register extends Component {
   constructor() {
     super();
     this.state = {
-      name: '',
-      email: '',
+      username: '',
       password: '',
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
   handleChange(e) {
-    const objectState = {};
-    const keyState = e.target.name;
-    objectState[keyState] = e.target.name;
-    this.setState(objectState);
+    const stateObj = {};
+    const stateKey = e.target.name;
+    stateObj[stateKey] = e.target.value;
+    this.setState(stateObj);
   }
   handleSubmit() {
-    const { name, email, password } = this.state;
+    const { username, password } = this.state;
     firebase.auth()
-      .signInWithEmailAndPassword(name, email, password)
+      .createUserWithEmailAndPassword(username, password)
       .catch((err) => {
         console.log(err);
       })
-      .then((newUser) => {
+      .then((user) => {
         firebase.database().ref('users')
-          .child(newUser.uid)
-          .set({ name: '', email: email })
+          .child(user.uid)
+          .set({ first_name: '', last_name: '', email: username })
       })
       .then(() => {
-        this.props.router.push('./app')
+        this.props.router.push('/app')
       });
   }
   render() {
@@ -43,15 +41,7 @@ class Register extends Component {
         <div id="register-form">
           <div>
             <input
-              name="name"
-              onChange={this.handleChange}
-              type="text"
-              placeholder="name"
-            />
-          </div>
-          <div>
-            <input
-              name="email"
+              name="username"
               onChange={this.handleChange}
               type="text"
               placeholder="email"
@@ -73,5 +63,6 @@ class Register extends Component {
     );
   }
 }
+
 
 export default withRouter(Register);

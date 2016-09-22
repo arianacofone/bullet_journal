@@ -1,6 +1,8 @@
 // Main component renders login children and deals with logged in/logged out state
 
 import React, { Component } from 'react';
+import { Link } from 'react-router';
+import firebase from '../../firebase.config.js';
 
 const propTypes = {
   children: React.PropTypes.element.isRequired,

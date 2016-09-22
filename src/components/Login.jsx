@@ -8,7 +8,7 @@ class Login extends Component {
   constructor() {
     super();
     this.state = {
-      email: '',
+      username: '',
       password: '',
     };
     this.handleChange = this.handleChange.bind(this);
@@ -21,15 +21,15 @@ class Login extends Component {
     this.setState(objectState);
   }
   handleSubmit() {
-    const { email, password } = this.state;
+    const { username, password } = this.state;
     firebase.auth()
-      .signInWithEmailAndPassword(email, password)
+      .signInWithEmailAndPassword(username, password)
       .catch((err) => {
         const errorCode = err.code;
         const errorMessage = err.message;
       })
       .then(() => {
-        this.props.router.push('./app')
+        this.props.router.push('/app')
       });
   }
   render() {
@@ -39,7 +39,7 @@ class Login extends Component {
         <div id="login-form">
           <div>
             <input
-              name="email"
+              name="username"
               onChange={this.handleChange}
               type="text"
               placeholder="email"
