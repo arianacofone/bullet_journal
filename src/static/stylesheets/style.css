@@ -1,3 +1,27 @@
 body {
   background-color: rgb(87,107,128);
+  /*text-align: center;*/
+}
+
+.current-date {
+  text-align: left;
+}
+
+.icons {
+  height: 80px;
+  width: 80px;
+  background-repeat: no-repeat;
+  background-size: 100%;
+}
+
+#home-icon {
+  background-image: url(./img/home.png);
+}
+
+#snooze-icon {
+  background-image: url(./img/clock.png);
+}
+
+#archive-icon {
+  background-image: url(./img/mark.png);
 }

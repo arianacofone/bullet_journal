@@ -8,7 +8,7 @@ const moment = require('moment');
 const Date = () => {
   const now = moment().format('dddd, MMMM Do');
   return (
-    <div>
+    <div id="current-date">
       {now}
     </div>
   );
