@@ -1,5 +1,6 @@
-import React, {Component} from 'react';
-import { withRouter } from 'react-router';
+import React, { Component } from 'react';
+// import { withRouter } from 'react-router';
+import Date from './Date.jsx';
 
 class Dashboard extends Component {
   // constructor() {
@@ -8,8 +9,8 @@ class Dashboard extends Component {
   render() {
     return (
       <div id="dashboard">
-        <h2> Dashboard is pulling in! </h2>
-        {/* <Date /> */}
+        <h2> DASHBOARD </h2>
+        <Date />
         {/* <Menu /> */}
         {/* <PostInput />
         <PostList /> */}
