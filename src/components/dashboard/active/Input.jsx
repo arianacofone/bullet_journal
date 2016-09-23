@@ -7,12 +7,19 @@ const Input = () => {
       <form className="post-display">
         <input
           type="text"
-          name="author"
-          value="text"
+          name="todo"
         />
         <input
           type="submit"
-          value="task"
+          value="DOT"
+        />
+        <input
+          type="submit"
+          value="CIRCLE"
+        />
+        <input
+          type="submit"
+          value="DASH"
         />
       </form>
     </div>
