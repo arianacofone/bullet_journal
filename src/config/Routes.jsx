@@ -5,6 +5,9 @@ import Login from '../components/Login.jsx';
 import Register from '../components/Register.jsx';
 import App from '../components/App.jsx';
 import Dashboard from '../components/dashboard/Dashboard.jsx';
+import Active from '../components/dashboard/active/Active.jsx';
+import Snooze from '../components/dashboard/snoozed/Snooze.jsx';
+import Archive from '../components/dashboard/archive/Archive.jsx';
 
 const Routes = () => {
   return (
@@ -13,7 +16,11 @@ const Routes = () => {
         <IndexRoute component={Login} />
         <Route path="/register" component={Register} />
         <Route path="/app" component={App}>
-          <Route path="/dashboard" component={Dashboard} />
+          <Route path="/dashboard" component={Dashboard} >
+            <Route path="/:active" component={Active} />
+            <Route path="/:snooze" component={Snooze} />
+            <Route path="/:archive" component={Archive} />
+          </Route>
         </Route>
       </Route>
     </Router>

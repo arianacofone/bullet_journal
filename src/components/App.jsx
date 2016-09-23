@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { withRouter } from 'react-router';
+// import { withRouter } from 'react-router';
 import Dashboard from './dashboard/Dashboard.jsx';
 
 class App extends Component {
@@ -12,4 +12,4 @@ class App extends Component {
   }
 }
 
-export default withRouter(App);
+export default App;
