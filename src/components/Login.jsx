@@ -29,7 +29,8 @@ class Login extends Component {
         const errorMessage = err.message;
       })
       .then(() => {
-        this.props.router.push('/app')
+        const userId = firebase.auth().currentUser.uid;
+        this.props.router.push(`/${userId}`);
       });
   }
   render() {
