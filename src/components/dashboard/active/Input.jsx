@@ -1,27 +1,36 @@
 import React, { Component } from 'react';
 
-const propTypes = {
-  handlePost: React.PropTypes.func,
-};
+// const propTypes = {
+//   httpPost: React.PropTypes.func,
+// };
 
 class Input extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      localInput: '',
+      localInput: this.props.localInput || '',
     };
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleEditInput = this.handleEditInput.bind(this);
   }
-  handleSubmit(e) {
-    e.preventDefault();
-    this.props.handlePost({
-      localInput: this.state.localInput,
+  componentWillReceiveProps(nextProps) {
+    this.setState({
+      localInput: nextProps.localInput || '',
     });
   }
   handleEditInput(e) {
     const data = e.target.value;
-    this.setState({ localInput: data })
+    this.setState({
+      localInput: data,
+    });
+  }
+  handleSubmit(e) {
+    e.preventDefault();
+    this.props.httpPost({
+      localInput: this.state.localInput,
+      status: '',
+      createDate: '',
+    });
   }
   render() {
     return (
@@ -35,16 +44,19 @@ class Input extends Component {
             onChange={this.handleEditInput}
           />
           <input
+            name="task"
             type="submit"
-            value="DOT"
+            value="."
           />
           <input
+            name="event"
             type="submit"
-            value="CIRCLE"
+            value="o"
           />
           <input
+            name="note"
             type="submit"
-            value="DASH"
+            value="-"
           />
         </form>
       </div>
@@ -52,6 +64,6 @@ class Input extends Component {
   }
 }
 
-Input.propTypes = propTypes;
+// Input.propTypes = propTypes;
 
 export default Input;
