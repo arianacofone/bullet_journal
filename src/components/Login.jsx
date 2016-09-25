@@ -1,7 +1,7 @@
 // This file handles login component tied to firebase authorization.
 
 import React, { Component } from 'react';
-import { withRouter, Link } from 'react-router';
+import { Link, withRouter } from 'react-router';
 import firebase from '../../firebase.config.js';
 
 class Login extends Component {

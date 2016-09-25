@@ -19,7 +19,7 @@ class Register extends Component {
     this.setState(stateObj);
   }
   handleSubmit() {
-    const { username, password } = this.state;
+    const { name, username, password } = this.state;
     firebase.auth()
       .createUserWithEmailAndPassword(username, password)
       .catch((err) => {
@@ -28,7 +28,8 @@ class Register extends Component {
       .then((user) => {
         firebase.database().ref('users')
           .child(user.uid)
-          .set({ first_name: '', last_name: '', email: username })
+          .set({
+            first_name: name, email: username })
       })
       .then(() => {
         const userId = firebase.auth().currentUser.uid;
@@ -40,6 +41,14 @@ class Register extends Component {
       <div id="register">
         <h4>REGISTER</h4>
         <div id="register-form">
+        <div>
+          <input
+            name="name"
+            onChange={this.handleChange}
+            type="text"
+            placeholder="name"
+          />
+        </div>
           <div>
             <input
               name="username"
