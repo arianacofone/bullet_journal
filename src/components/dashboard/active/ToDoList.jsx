@@ -41,13 +41,8 @@ class ToDoList extends Component {
     const itemElements = ids.map((id, idx) => {
       const item = this.props.items[id];
       return (
-        <li key={idx} id={item.id} className="li-item"
-            // className={this.isDone() ? 'done' : 'not-done'}
-        >
-          <form>
-            <div className="to-do-item">
-              {item.Input}
-            </div>
+        <li key={idx} id={item.id}>
+            {item.Input}
             <button
               name="task"
               type="submit"
@@ -69,7 +64,6 @@ class ToDoList extends Component {
               value={item.id}
               onClick={this.handleDeleteClick}
             > </button>
-          </form>
         </li>
       );
     });

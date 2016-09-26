@@ -182,6 +182,9 @@ a {
   background-position: center;
 }
 
+.done {
+  background-color: rgba(3,198,185,.6);
+}
 
 ul {
   list-style: none;
@@ -191,20 +194,14 @@ ul {
 li {
   background-color: white;
   border-radius: 5px;
+  text-align: left;
   width: 25rem;
   display: block;
   margin: 1rem;
   padding: .3rem;
-}
+  height: 3.5rem;
+  top: -2rem;
 
-.to-do-item {
-  background-color: white;
-  border-radius: 5px;
-  text-align: left;
-  width: 24rem;
-  display: block;
-  padding: .5rem;
-  border: none;
 }
 
 #done-button{
@@ -217,7 +214,8 @@ li {
   width: 2.5rem;
   border-radius: 5px;
   border: none;
-  margin-left: 15rem;
+  margin-left: 13rem;
+  margin-top: 1rem;
 }
 
 #snooze-button{
