@@ -1,35 +1,52 @@
 import React, { Component } from 'react';
 
-// const propTypes = {
-//   httpPost: React.PropTypes.func,
-// };
-
 class Input extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      localInput: this.props.localInput || '',
+      Input: this.props.input || '',
     };
-    this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleTaskSubmit = this.handleTaskSubmit.bind(this);
+    this.handleEventSubmit = this.handleEventSubmit.bind(this);
+    this.handleNoteSubmit = this.handleNoteSubmit.bind(this);
     this.handleEditInput = this.handleEditInput.bind(this);
   }
   componentWillReceiveProps(nextProps) {
     this.setState({
-      localInput: nextProps.localInput || '',
+      Input: nextProps.Input || '',
     });
   }
   handleEditInput(e) {
     const data = e.target.value;
     this.setState({
-      localInput: data,
+      Input: data,
     });
   }
-  handleSubmit(e) {
+  handleTaskSubmit(e) {
     e.preventDefault();
+    const today = new Date().toJSON().slice(0, 10);
     this.props.httpPost({
-      localInput: this.state.localInput,
-      status: '',
-      createDate: '',
+      Input: `● ${this.state.Input}`,
+      status: 'active',
+      createDate: today,
+    });
+  }
+  handleEventSubmit(e) {
+    e.preventDefault();
+    const today = new Date().toJSON().slice(0, 10);
+    this.props.httpPost({
+      Input: `○ ${this.state.Input}`,
+      status: 'active',
+      createDate: today,
+    });
+  }
+  handleNoteSubmit(e) {
+    e.preventDefault();
+    const today = new Date().toJSON().slice(0, 10);
+    this.props.httpPost({
+      Input: `- ${this.state.Input}`,
+      status: 'active',
+      createDate: today,
     });
   }
   render() {
@@ -40,28 +57,33 @@ class Input extends Component {
             id="task-input"
             type="text"
             name="todo"
-            value={this.state.localInput}
+            value={this.state.Input}
             onChange={this.handleEditInput}
             placeholder="Enter task, event, or note"
           />
           <input
             name="task"
             type="submit"
-            value="."
+            value=" "
             className="input-btn"
-            id="input-btn-one"
+            id="task-button"
+            onClick={this.handleTaskSubmit}
           />
           <input
             name="event"
             type="submit"
-            value="o"
+            value=" "
             className="input-btn"
+            id="event-button"
+            onClick={this.handleEventSubmit}
           />
           <input
             name="note"
             type="submit"
-            value="-"
+            value=" "
             className="input-btn"
+            id="note-button"
+            onClick={this.handleNoteSubmit}
           />
         </form>
       </div>
