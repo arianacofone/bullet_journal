@@ -13,7 +13,8 @@ class Active extends Component {
       items: [],
     };
     this.httpPost = this.httpPost.bind(this);
-    this.httpPatch = this.httpPatch.bind(this);
+    this.httpDonePatch = this.httpDonePatch.bind(this);
+    this.httpSnoozePatch = this.httpSnoozePatch.bind(this);
     this.httpDelete = this.httpDelete.bind(this);
   }
   componentDidMount() {
@@ -49,20 +50,27 @@ class Active extends Component {
              this.httpGet();
            });
   }
-  httpPatch({ id, localInput, status, createDate }) {
+  httpDonePatch(id) {
     const userId = firebase.auth().currentUser.uid;
-    const url = `https://sync-12ff7.firebaseio.com/users/${userId}/items/${id}`;
-    request.patch(url)
-           .send({ localInput, status, createDate })
-           .then(() => {
-             this.httpGet();
-           });
+    const req = firebase.database().ref(`/users/${userId}/items/${id}`);
+    console.log(req);
+    req.update({ status: 'done' }).then((data) => {
+      this.httpGet();
+    });
+  }
+  httpSnoozePatch(id) {
+    const userId = firebase.auth().currentUser.uid;
+    const req = firebase.database().ref(`/users/${userId}/items/${id}`);
+    console.log(req);
+    req.update({ status: 'snooze' }).then((data) => {
+      this.httpGet();
+    });
   }
   httpDelete(id) {
     const userId = firebase.auth().currentUser.uid;
     const req = firebase.database().ref(`/users/${userId}/items/${id}`);
     req.remove().then((data) => {
-      this.httpGet()
+      this.httpGet();
     });
   }
   render() {
@@ -74,7 +82,8 @@ class Active extends Component {
         <Date />
         <ToDoList
           items={this.state.items}
-          httpPatch={this.httpPatch}
+          httpDonePatch={this.httpDonePatch}
+          httpSnoozePatch={this.httpSnoozePatch}
           httpDelete={this.httpDelete}
         />
       </div>
