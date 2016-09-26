@@ -31,7 +31,7 @@ class Active extends Component {
                  const todoItem = itemsData[id];
                  return {
                    id,
-                   localInput: todoItem.localInput,
+                   Input: todoItem.Input,
                    status: todoItem.status,
                    createDate: todoItem.createDate,
                  };
@@ -40,18 +40,18 @@ class Active extends Component {
              this.setState({ items });
            });
   }
-  httpPost({ localInput, status, createDate }) {
+  httpPost({ Input, status, createDate }) {
     const userId = firebase.auth().currentUser.uid;
     const url = `https://sync-12ff7.firebaseio.com/users/${userId}/items.json`;
     request.post(url)
-           .send({ localInput, status, createDate })
+           .send({ Input, status, createDate })
            .then(() => {
              this.httpGet();
            });
   }
   httpPatch({ id, localInput, status, createDate }) {
     const userId = firebase.auth().currentUser.uid;
-    const url = `https://sync-12ff7.firebaseio.com/users/${userId}/todo/${id}`;
+    const url = `https://sync-12ff7.firebaseio.com/users/${userId}/items/${id}`;
     request.patch(url)
            .send({ localInput, status, createDate })
            .then(() => {
@@ -60,11 +60,10 @@ class Active extends Component {
   }
   httpDelete(id) {
     const userId = firebase.auth().currentUser.uid;
-    const url = `https://sync-12ff7.firebaseio.com/users/${userId}/todo/${id}`;
-    request.del(url)
-           .then(() => {
-             this.httpGet();
-           });
+    const req = firebase.database().ref(`/users/${userId}/items/${id}`);
+    req.remove().then((data) => {
+      this.httpGet()
+    });
   }
   render() {
     return (
