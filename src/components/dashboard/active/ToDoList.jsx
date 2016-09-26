@@ -3,6 +3,8 @@ import React, { Component } from 'react';
 const propTypes = {
   id: React.PropTypes.string,
   httpDelete: React.PropTypes.func,
+  httpDonePatch: React.PropTypes.func,
+  httpSnoozePatch: React.PropTypes.func,
   items: React.PropTypes.array,
 };
 
@@ -10,35 +12,28 @@ class ToDoList extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      localInput: this.props.Input,
+      localInput: '',
     };
-    this.handleEditofInput = this.handleEditofInput.bind(this);
-    this.handleNewSubmit = this.handleNewSubmit.bind(this);
     this.handleDeleteClick = this.handleDeleteClick.bind(this);
+    this.handleDoneClick = this.handleDoneClick.bind(this);
+    this.handleSnoozeClick = this.handleSnoozeClick.bind(this);
+    // this.isDone = this.isDone.bind(this);
   }
-  // componentWillReceiveProps(nextProps) {
-  //   this.setState({
-  //     localInput: nextProps.localInput;
-  //   })
-  // }
-  handleEditofInput(e) {
-    const newInput = e.target.value;
-    this.setState({
-      localInput: newInput,
-    });
-  }
-  handleNewSubmit(e) {
+  handleDoneClick(e) {
     e.preventDefault();
-    this.props.httpPatch({
-      id: this.props.id,
-      localInput: this.state.localInput,
-      status: '',
-      createDate: '',
-    });
+    this.props.httpDonePatch(e.target.value);
+    // this.props.isDone(e.target.value);
+  }
+  // isDone() {
+  //   if (this.props.status === 'done') {
+  //   } return (this.setState({className: 'done' }));
+  // }
+  handleSnoozeClick(e) {
+    e.preventDefault();
+    this.props.httpSnoozePatch(e.target.value);
   }
   handleDeleteClick(e) {
     e.preventDefault();
-    console.log(e.target);
     this.props.httpDelete(e.target.value);
   }
   render() {
@@ -46,24 +41,34 @@ class ToDoList extends Component {
     const itemElements = ids.map((id, idx) => {
       const item = this.props.items[id];
       return (
-        <li key={idx} id={item.id} className="li-item">
+        <li key={idx} id={item.id} className="li-item"
+            // className={this.isDone() ? 'done' : 'not-done'}
+        >
           <form>
-            <input
-              value={item.Input}
-              onChange={this.handleEditofInput}
-              className="to-do-item"
-            />
-            <input
+            <div className="to-do-item">
+              {item.Input}
+            </div>
+            <button
               name="task"
               type="submit"
-              value="Done"
-            />
+              id="done-button"
+              value={item.id}
+              onClick={this.handleDoneClick}
+            > </button>
+            <button
+              name="task"
+              type="submit"
+              id="snooze-button"
+              value={item.id}
+              onClick={this.handleSnoozeClick}
+            > </button>
             <button
               name="note"
               type="submit"
+              id="delete-button"
               value={item.id}
               onClick={this.handleDeleteClick}
-            >Delete</button>
+            > </button>
           </form>
         </li>
       );
