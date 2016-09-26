@@ -38,37 +38,38 @@ class Register extends Component {
   }
   render() {
     return (
-      <div id="register">
-        <h4>REGISTER</h4>
-        <div id="register-form">
+      <div>
+        <h3 className="sync-title">SYNC</h3>
         <div>
           <input
+            className="main-inputs"
             name="name"
             onChange={this.handleChange}
             type="text"
             placeholder="name"
           />
         </div>
-          <div>
-            <input
-              name="username"
-              onChange={this.handleChange}
-              type="text"
-              placeholder="email"
-            />
-          </div>
-          <div>
-            <input
-              name="password"
-              onChange={this.handleChange}
-              type="password"
-              placeholder="password"
-            />
-          </div>
-          <button className="btn" onClick={this.handleSubmit}>
-            Register
-          </button>
+        <div>
+          <input
+            className="main-inputs"
+            name="username"
+            onChange={this.handleChange}
+            type="text"
+            placeholder="email"
+          />
         </div>
+        <div>
+          <input
+            className="main-inputs"
+            name="password"
+            onChange={this.handleChange}
+            type="password"
+            placeholder="password"
+          />
+        </div>
+        <button className="main-inputs" id="register" onClick={this.handleSubmit}>
+          SIGN UP
+        </button>
       </div>
     );
   }

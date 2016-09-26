@@ -35,28 +35,33 @@ class Input extends Component {
   render() {
     return (
       <div id="input">
-        <h3>Input Form</h3>
         <form className="input-display" onSubmit={this.handleSubmit}>
           <input
+            id="task-input"
             type="text"
             name="todo"
             value={this.state.localInput}
             onChange={this.handleEditInput}
+            placeholder="Enter task, event, or note"
           />
           <input
             name="task"
             type="submit"
             value="."
+            className="input-btn"
+            id="input-btn-one"
           />
           <input
             name="event"
             type="submit"
             value="o"
+            className="input-btn"
           />
           <input
             name="note"
             type="submit"
             value="-"
+            className="input-btn"
           />
         </form>
       </div>

@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router';
 import firebase from '../../../firebase.config.js';
-import Date from './Date.jsx';
 import Menu from './Menu.jsx';
 
 class Dashboard extends Component {
@@ -22,8 +21,7 @@ class Dashboard extends Component {
   render() {
     return (
       <div id="dashboard">
-        <h2> DASHBOARD </h2>
-        <Date />
+        <h3 className="sync">SYNC</h3>
         <Menu />
         <button id="sign-out" onClick={this.signOut}> logout</button>
       </div>

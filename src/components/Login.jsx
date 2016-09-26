@@ -36,14 +36,21 @@ class Login extends Component {
   render() {
     return (
       <div id="login">
-        <h4>LOGIN</h4>
+        <button
+          to="/register"
+          id="register-btn"
+        >
+          <Link to="/register" id="register">SIGN UP</Link>
+        </button>
+        <h3 className="sync-title">SYNC</h3>
         <div id="login-form">
           <div>
             <input
               name="username"
               onChange={this.handleChange}
               type="text"
-              placeholder="email"
+              placeholder="Email"
+              className="main-inputs"
             />
           </div>
           <div>
@@ -51,13 +58,17 @@ class Login extends Component {
               name="password"
               onChange={this.handleChange}
               type="password"
-              placeholder="password"
+              placeholder="Password"
+              className="main-inputs"
             />
           </div>
-          <button className="btn" onClick={this.handleSubmit}>
-            Login
+          <button
+            onClick={this.handleSubmit}
+            className="main-inputs"
+            id="login-btn"
+          >
+          LOG IN
           </button>
-          <Link to="/register" id="register">Register</Link>
         </div>
       </div>
     );

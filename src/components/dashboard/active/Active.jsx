@@ -3,6 +3,7 @@ import request from 'superagent';
 import { withRouter } from 'react-router';
 import firebase from '../../../../firebase.config.js';
 import Input from './Input.jsx';
+import Date from './../Date.jsx';
 import ToDoList from './ToDoList.jsx';
 
 class Active extends Component {
@@ -20,7 +21,7 @@ class Active extends Component {
   }
   httpGet() {
     const userId = firebase.auth().currentUser.uid;
-    const url = `https://lazr-1da5a.firebaseio.com/users/${userId}/items.json`;
+    const url = `https://sync-12ff7.firebaseio.com/users/${userId}/items.json`;
     request.get(url)
            .then((response) => {
              const itemsData = response.body;
@@ -41,25 +42,25 @@ class Active extends Component {
   }
   httpPost({ localInput, status, createDate }) {
     const userId = firebase.auth().currentUser.uid;
-    const url = `https://lazr-1da5a.firebaseio.com/users/${userId}/items.json`;
+    const url = `https://sync-12ff7.firebaseio.com/users/${userId}/items.json`;
     request.post(url)
            .send({ localInput, status, createDate })
            .then(() => {
              this.httpGet();
            });
   }
-  httpPatch({ itemId, localInput, status, createDate }) {
+  httpPatch({ id, localInput, status, createDate }) {
     const userId = firebase.auth().currentUser.uid;
-    const url = `https://lazr-1da5a.firebaseio.com/users/${userId}/todo/${itemId}`;
+    const url = `https://sync-12ff7.firebaseio.com/users/${userId}/todo/${id}`;
     request.patch(url)
-           .send({ itemContent })
+           .send({ localInput, status, createDate })
            .then(() => {
              this.httpGet();
            });
   }
-  httpDelete(itemId) {
+  httpDelete(id) {
     const userId = firebase.auth().currentUser.uid;
-    const url = `https://lazr-1da5a.firebaseio.com/users/${userId}/todo/${itemId}`;
+    const url = `https://sync-12ff7.firebaseio.com/users/${userId}/todo/${id}`;
     request.del(url)
            .then(() => {
              this.httpGet();
@@ -68,8 +69,10 @@ class Active extends Component {
   render() {
     return (
       <div>
-        <h3>ACTIVE</h3>
-        <Input httpPost={this.httpPost} />
+        <Input
+          httpPost={this.httpPost}
+        />
+        <Date />
         <ToDoList
           items={this.state.items}
           httpPatch={this.httpPatch}

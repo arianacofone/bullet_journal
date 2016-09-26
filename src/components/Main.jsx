@@ -10,10 +10,7 @@ class Main extends Component {
   render() {
     return (
       <div id="main-component">
-        <h3>LAZR</h3>
-        <div id="children-list">
-          {this.props.children}
-        </div>
+        {this.props.children}
       </div>
     );
   }
