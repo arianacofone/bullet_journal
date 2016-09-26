@@ -6,9 +6,6 @@ import Menu from './Menu.jsx';
 class Dashboard extends Component {
   constructor() {
     super();
-    // this.state = {
-    //   loggedIn: false,
-    // };
     this.signOut = this.signOut.bind(this);
   }
   signOut() {
@@ -23,11 +20,11 @@ class Dashboard extends Component {
       <div id="dashboard">
         <h3 className="sync">SYNC</h3>
         <Menu />
-        <button id="sign-out" onClick={this.signOut}> logout</button>
+        <button id="sign-out" onClick={this.signOut}> LOG OUT</button>
       </div>
     );
   }
-};
+}
 
 
 export default withRouter(Dashboard);
