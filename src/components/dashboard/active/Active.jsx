@@ -55,6 +55,7 @@ class Active extends Component {
     const req = firebase.database().ref(`/users/${userId}/items/${id}`);
     console.log(req);
     req.update({ status: 'done' }).then((data) => {
+      document.getElementById(`${id}`).setAttribute('class', 'done');
       this.httpGet();
     });
   }
