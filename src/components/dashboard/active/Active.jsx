@@ -55,7 +55,7 @@ class Active extends Component {
     const req = firebase.database().ref(`/users/${userId}/items/${id}`);
     console.log(req);
     req.update({ status: 'done' }).then((data) => {
-      document.getElementById(`${id}`).setAttribute('class', 'done');
+      document.getElementById(`${id}`).setAttribute('class', 'done-click');
       this.httpGet();
     });
   }
@@ -64,6 +64,7 @@ class Active extends Component {
     const req = firebase.database().ref(`/users/${userId}/items/${id}`);
     console.log(req);
     req.update({ status: 'snooze' }).then((data) => {
+      document.getElementById(`${id}`).setAttribute('class', 'snooze-click');
       this.httpGet();
     });
   }
