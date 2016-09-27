@@ -40,13 +40,28 @@ class Menu extends Component {
   render() {
     return (
       <div id="menu-icons">
-        <div id="home-icon" onClick={this.activeHandler} className="icons" to="/:active" >
-          <Link to="/:active" />
+        <div
+          to="/:active"
+          id="home-icon"
+          className="icons"
+          onClick={this.activeHandler}
+        >
+          <Link to="/:active"/>
         </div>
-        <div id="snooze-icon" onClick={this.snoozeHandler} className="icons" to="/:snooze" >
+        <div
+          to="/:snooze"
+          id="snooze-icon"
+          className="icons"
+          onClick={this.snoozeHandler}
+        >
           <Link to="/:snooze" />
         </div>
-        <div id="archive-icon" onClick={this.archiveHandler} className="icons" to="/:archive">
+        <div
+          to="/:archive"
+          id="archive-icon"
+          className="icons"
+          onClick={this.archiveHandler}
+        >
           <Link to="/:archive" />
         </div>
         {this.state.active ? <Active activeHandler={this.activeHandler} /> : false }

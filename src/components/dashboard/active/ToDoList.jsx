@@ -17,17 +17,11 @@ class ToDoList extends Component {
     this.handleDeleteClick = this.handleDeleteClick.bind(this);
     this.handleDoneClick = this.handleDoneClick.bind(this);
     this.handleSnoozeClick = this.handleSnoozeClick.bind(this);
-    // this.isDone = this.isDone.bind(this);
   }
   handleDoneClick(e) {
     e.preventDefault();
     this.props.httpDonePatch(e.target.value);
-    // this.props.isDone(e.target.value);
   }
-  // isDone() {
-  //   if (this.props.status === 'done') {
-  //   } return (this.setState({className: 'done' }));
-  // }
   handleSnoozeClick(e) {
     e.preventDefault();
     this.props.httpSnoozePatch(e.target.value);
@@ -42,28 +36,30 @@ class ToDoList extends Component {
       const item = this.props.items[id];
       return (
         <li key={idx} id={item.id}>
-            {item.Input}
-            <button
-              name="task"
-              type="submit"
-              id="done-button"
-              value={item.id}
-              onClick={this.handleDoneClick}
-            > </button>
+          {item.Input}
+          <div id="action-buttons">
             <button
               name="task"
               type="submit"
               id="snooze-button"
               value={item.id}
               onClick={this.handleSnoozeClick}
-            > </button>
+            />
             <button
               name="note"
               type="submit"
               id="delete-button"
               value={item.id}
               onClick={this.handleDeleteClick}
-            > </button>
+            />
+            <button
+              name="task"
+              type="submit"
+              id="done-button"
+              value={item.id}
+              onClick={this.handleDoneClick}
+            />
+          </div>
         </li>
       );
     });

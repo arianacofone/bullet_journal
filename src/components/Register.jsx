@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import firebase from '../../firebase.config.js';
 import { withRouter } from 'react-router';
+import firebase from '../../firebase.config.js';
 
 class Register extends Component {
   constructor() {
@@ -28,8 +28,7 @@ class Register extends Component {
       .then((user) => {
         firebase.database().ref('users')
           .child(user.uid)
-          .set({
-            first_name: name, email: username })
+          .set({ first_name: name, email: username });
       })
       .then(() => {
         const userId = firebase.auth().currentUser.uid;
@@ -38,35 +37,29 @@ class Register extends Component {
   }
   render() {
     return (
-      <div>
+      <div id="registration-form">
         <h3 className="sync-title">SYNC</h3>
-        <div>
-          <input
-            className="main-inputs"
-            name="name"
-            onChange={this.handleChange}
-            type="text"
-            placeholder="name"
-          />
-        </div>
-        <div>
-          <input
-            className="main-inputs"
-            name="username"
-            onChange={this.handleChange}
-            type="text"
-            placeholder="email"
-          />
-        </div>
-        <div>
-          <input
-            className="main-inputs"
-            name="password"
-            onChange={this.handleChange}
-            type="password"
-            placeholder="password"
-          />
-        </div>
+        <input
+          className="main-inputs"
+          name="name"
+          onChange={this.handleChange}
+          type="text"
+          placeholder="name"
+        />
+        <input
+          className="main-inputs"
+          name="username"
+          onChange={this.handleChange}
+          type="text"
+          placeholder="email"
+        />
+        <input
+          className="main-inputs"
+          name="password"
+          onChange={this.handleChange}
+          type="password"
+          placeholder="password"
+        />
         <button className="main-inputs" id="register" onClick={this.handleSubmit}>
           SIGN UP
         </button>
@@ -74,6 +67,5 @@ class Register extends Component {
     );
   }
 }
-
 
 export default withRouter(Register);

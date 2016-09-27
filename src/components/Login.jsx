@@ -42,30 +42,26 @@ class Login extends Component {
         >
           <Link to="/register" id="register">SIGN UP</Link>
         </button>
-        <h3 className="sync-title">SYNC</h3>
         <div id="login-form">
-          <div>
-            <input
-              name="username"
-              onChange={this.handleChange}
-              type="text"
-              placeholder="Email"
-              className="main-inputs"
-            />
-          </div>
-          <div>
-            <input
-              name="password"
-              onChange={this.handleChange}
-              type="password"
-              placeholder="Password"
-              className="main-inputs"
-            />
-          </div>
+          <h3 className="sync-title">SYNC</h3>
+          <input
+            name="username"
+            type="text"
+            placeholder="Email"
+            className="main-inputs"
+            onChange={this.handleChange}
+          />
+          <input
+            name="password"
+            type="password"
+            placeholder="Password"
+            className="main-inputs"
+            onChange={this.handleChange}
+          />
           <button
-            onClick={this.handleSubmit}
             className="main-inputs"
             id="login-btn"
+            onClick={this.handleSubmit}
           >
           LOG IN
           </button>

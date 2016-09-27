@@ -1,10 +1,15 @@
 import React, { Component } from 'react';
 
+const propTypes = {
+  httpPost: React.PropTypes.func,
+  Input: React.PropTypes.array,
+};
+
 class Input extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      Input: this.props.input || '',
+      Input: this.props.Input || '',
     };
     this.handleTaskSubmit = this.handleTaskSubmit.bind(this);
     this.handleEventSubmit = this.handleEventSubmit.bind(this);
@@ -91,6 +96,6 @@ class Input extends Component {
   }
 }
 
-// Input.propTypes = propTypes;
+Input.propTypes = propTypes;
 
 export default Input;

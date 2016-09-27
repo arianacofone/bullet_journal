@@ -6,6 +6,9 @@ import Menu from './Menu.jsx';
 class Dashboard extends Component {
   constructor() {
     super();
+    this.state = {
+      loggedIn: false,
+    };
     this.signOut = this.signOut.bind(this);
   }
   signOut() {
@@ -25,6 +28,5 @@ class Dashboard extends Component {
     );
   }
 }
-
 
 export default withRouter(Dashboard);

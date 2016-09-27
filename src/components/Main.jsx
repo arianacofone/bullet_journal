@@ -16,7 +16,6 @@ class Main extends Component {
   }
 }
 
-
 export default Main;
 
 Main.propTypes = propTypes;
